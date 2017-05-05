@@ -38,7 +38,7 @@ $ docker run --net=none --rm -v $PWD:/etc/openvpn kylemanna/openvpn ovpn_getclie
 * Prepare the namespace and some file permissions.
 
 ```bash
-$ kubectl apply -f 00-namespace.yaml
+$ kubectl apply -f ../00-namespace.yaml
 $ kubectl config set-context $(kubectl config current-context) --namespace=ovpn
 # Validate it
 $ kubectl config view | grep namespace:
