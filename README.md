@@ -10,7 +10,8 @@ OpenVPN on a Kubernetes cluster. Save on compute resources by kuberizing service
 # docker
 $ mkdir openvpn0 && cd openvpn0
 $ docker run --net=none --rm -it -v $PWD:/etc/openvpn kylemanna/openvpn ovpn_genconfig \
-    -u udp://VPN.SERVERNAME.COM -C 'AES-256-GCM' -a 'SHA384' -T 'TLS-ECDHE-ECDSA-WITH-AES-256-GCM-SHA384' \
+    -u udp://VPN.SERVERNAME.COM \
+    -C 'AES-256-GCM' -a 'SHA384' -T 'TLS-ECDHE-ECDSA-WITH-AES-256-GCM-SHA384' \
     -b -n 185.121.177.177 -n 185.121.177.53 -n 87.98.175.85
 $ docker run -e EASYRSA_ALGO=ec -e EASYRSA_CURVE=secp384r1 \
     --net=none --rm -it -v $PWD:/etc/openvpn kylemanna/openvpn ovpn_initpki
