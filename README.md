@@ -25,10 +25,28 @@ $ docker run -e EASYRSA_ALGO=ec -e EASYRSA_CURVE=secp384r1 \
 $ docker run --net=none --rm -v $PWD:/etc/openvpn kylemanna/openvpn ovpn_getclient $CLIENTNAME > $CLIENTNAME.ovpn
 ```
 
+* Create ConfigMaps and Secrets.
+
+```bash
+$ kubectl config set-context $(kubectl config current-context) --namespace=ovpn
+# Validate it
+$ kubectl config view | grep namespace:
+$ kubectl create secret generic ovpn0-key --from-file=server/pki/private/VPN.SERVERNAME.COM.key
+$ kubectl create secret generic ovpn0-cert --from-file=server/pki/issued/VPN.SERVERNAME.COM.crt
+$ kubectl create secret generic ovpn0-ca-crt --from-file=server/pki/ca.crt
+$ kubectl create secret generic ovpn0-dh --from-file=server/pki/dh.pem
+$ kubectl create secret generic ovpn0-ta --from-file=server/pki/ta.key
+$ kubectl create configmap openvpn-conf --from-file=server/openvpn.conf
+$ kubectl create configmap ovpn-env --from-file=server/ovpn_env.sh
+$ kubectl create configmap ccd --from-file=server/ccd
+
+```
+
 * Bring up the OpenVPN server in your Kubernetes cluster.
 
 ```bash
-
+$ kubectl apply -f 00-namespace.yaml
+$ kubectl apply -f ovpn-Deployment.yaml
 ```
 
 ## TODO
