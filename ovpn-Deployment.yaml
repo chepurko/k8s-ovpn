@@ -33,7 +33,7 @@ spec:
         app: ovpn
     spec:
       containers:
-      - image: kylemanna/openvpn
+      - image: chepurko/docker-openvpn
         name: openvpn
         ports:
         - containerPort: 1194
@@ -45,50 +45,29 @@ spec:
         volumeMounts:
         - name: ovpn0-key
           mountPath: /etc/openvpn/pki/private
-          readOnly: true
         - name: ovpn0-cert
           mountPath: /etc/openvpn/pki/issued
-          readOnly: true
-        - name: ovpn0-ca-crt
+        - name: ovpn0-pki
           mountPath: /etc/openvpn/pki
-          readOnly: true
-        - name: ovpn0-dh
-          mountPath: /etc/openvpn/pki
-          readOnly: true
-        - name: ovpn0-ta
-          mountPath: /etc/openvpn/pki
-          readOnly: true
-        - name: ovpn0-conf
+        - name: openvpn-conf
           mountPath: /etc/openvpn
-          readOnly: true
-        - name: ovpn0-env
-          mountPath: /etc/openvpn
-          readOnly: true
         - name: ccd
-          mountPath: /etc/openvpn
-          readOnly: true
+          mountPath: /etc/openvpn/ccd
       volumes:
       - name: ovpn0-key
         secret:
           secretName: ovpn0-key
+          defaultMode: 0600
       - name: ovpn0-cert
         secret:
           secretName: ovpn0-cert
-      - name: ovpn0-ca-crt
+      - name: ovpn0-pki
         secret:
-          secretName: ovpn0-ca-crt
-      - name: ovpn0-dh
-        secret:
-          secretName: ovpn0-dh
-      - name: ovpn0-ta
-        secret:
-          secretName: ovpn0-ta
+          secretName: ovpn0-pki
+          defaultMode: 0600
       - name: openvpn-conf
         configMap:
           name: openvpn-conf
-      - name: ovpn-env
-        configMap:
-          name: ovpn-env
       - name: ccd
         configMap:
           name: ccd

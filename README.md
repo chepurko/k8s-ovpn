@@ -10,7 +10,8 @@ OpenVPN on a Kubernetes cluster. Save on compute resources by kuberizing service
 # docker
 $ mkdir openvpn0 && cd openvpn0
 $ docker run --net=none --rm -it -v $PWD:/etc/openvpn kylemanna/openvpn ovpn_genconfig \
-    -u udp://VPN.SERVERNAME.COM -C 'AES-256-GCM' -a 'SHA384' -T 'TLS-ECDHE-ECDSA-WITH-AES-256-GCM-SHA384'
+    -u udp://VPN.SERVERNAME.COM -C 'AES-256-GCM' -a 'SHA384' -T 'TLS-ECDHE-ECDSA-WITH-AES-256-GCM-SHA384' \
+    -b -n 185.121.177.177 -n 185.121.177.53 -n 87.98.175.85
 $ docker run -e EASYRSA_ALGO=ec -e EASYRSA_CURVE=secp384r1 \
     --net=none --rm -it -v $PWD:/etc/openvpn kylemanna/openvpn ovpn_initpki
 $ docker run --net=none --rm -it -v $PWD:/etc/openvpn kylemanna/openvpn ovpn_copy_server_files
@@ -25,19 +26,24 @@ $ docker run -e EASYRSA_ALGO=ec -e EASYRSA_CURVE=secp384r1 \
 $ docker run --net=none --rm -v $PWD:/etc/openvpn kylemanna/openvpn ovpn_getclient $CLIENTNAME > $CLIENTNAME.ovpn
 ```
 
-* Create ConfigMaps and Secrets.
+* Prepare the namespace and some file permissions.
 
 ```bash
+$ kubectl apply -f 00-namespace.yaml
 $ kubectl config set-context $(kubectl config current-context) --namespace=ovpn
 # Validate it
 $ kubectl config view | grep namespace:
+$ sudo chown -R $USER:$USER server/*
+```
+
+* Create ConfigMaps and Secrets.
+
+```bash
 $ kubectl create secret generic ovpn0-key --from-file=server/pki/private/VPN.SERVERNAME.COM.key
 $ kubectl create secret generic ovpn0-cert --from-file=server/pki/issued/VPN.SERVERNAME.COM.crt
-$ kubectl create secret generic ovpn0-ca-crt --from-file=server/pki/ca.crt
-$ kubectl create secret generic ovpn0-dh --from-file=server/pki/dh.pem
-$ kubectl create secret generic ovpn0-ta --from-file=server/pki/ta.key
-$ kubectl create configmap openvpn-conf --from-file=server/openvpn.conf
-$ kubectl create configmap ovpn-env --from-file=server/ovpn_env.sh
+$ kubectl create secret generic ovpn0-pki \
+    --from-file=server/pki/ca.crt --from-file=server/pki/dh.pem --from-file=server/pki/ta.key
+$ kubectl create configmap openvpn-conf --from-file=server/
 $ kubectl create configmap ccd --from-file=server/ccd
 
 ```
@@ -45,9 +51,8 @@ $ kubectl create configmap ccd --from-file=server/ccd
 * Bring up the OpenVPN server in your Kubernetes cluster.
 
 ```bash
-$ kubectl apply -f 00-namespace.yaml
-$ kubectl apply -f ovpn-Deployment.yaml
+$ kubectl apply -f ../ovpn-Deployment.yaml
 ```
 
 ## TODO
-- [ ] Translate Docker Compose commands from [kylemanna/docker-openvpn/docs/docker-compose.md](https://github.com/kylemanna/docker-openvpn/blob/master/docs/docker-compose.md) into [`kubectl run`](https://kubernetes.io/docs/user-guide/kubectl/v1.6/#run)
+- [ ] Fix "Options error: Unrecognized option or missing or extra parameter(s) in /etc/openvpn/openvpn.conf:30: push (2.4.1)" - due to missing quotes in openvpn.conf
