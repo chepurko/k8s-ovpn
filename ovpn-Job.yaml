@@ -1,21 +1,4 @@
 apiVersion: v1
-kind: Service
-metadata:
-  name: ovpn
-  namespace: ovpn
-  labels:
-    app: ovpn
-spec:
-  ports:
-    - port: 1194
-      targetPort: 1194
-      protocol: UDP
-      name: openvpn
-  selector:
-    app: ovpn
-  type: LoadBalancer
----
-apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: ovpn-pv-claim
@@ -47,7 +30,7 @@ spec:
   template:
     metadata:
       labels:
-        name: openvpn
+        name: wp-nginx
         app: ovpn
     spec:
       containers:
@@ -60,6 +43,14 @@ spec:
           capabilities:
             add:
             - NET_ADMIN
+        env:
+        - name: WORDPRESS_DB_HOST
+          value: mariadb.core.svc.cluster.local # this must be the FQDN of the mariadb Service
+        - name: WORDPRESS_DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mariadb-pass-ovpn
+              key: mariadb-pass-ovpn.txt
         volumeMounts:
         - name: etc-openvpn
           mountPath: /etc/openvpn
