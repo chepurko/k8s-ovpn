@@ -27,6 +27,14 @@ $ docker run -e EASYRSA_ALGO=ec -e EASYRSA_CURVE=secp384r1 \
 $ docker run --net=none --rm -v $PWD:/etc/openvpn kylemanna/openvpn ovpn_getclient $CLIENTNAME > $CLIENTNAME.ovpn
 ```
 
+* Or generate client RSA certificates if your client doesn't support ECC
+
+```bash
+$ export CLIENTNAME="your_client_name"
+$ docker run --net=none --rm -it -v $PWD:/etc/openvpn kylemanna/openvpn easyrsa build-client-full $CLIENTNAME
+$ docker run --net=none --rm -v $PWD:/etc/openvpn kylemanna/openvpn ovpn_getclient $CLIENTNAME > $CLIENTNAME.ovpn
+```
+
 * Prepare the namespace and some file permissions.
 
 ```bash
