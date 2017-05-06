@@ -65,3 +65,4 @@ $ kubectl apply -f ../ovpn-Deployment.yaml
 
 ## TODO
 - [ ] Fix "Options error: Unrecognized option or missing or extra parameter(s) in /etc/openvpn/openvpn.conf:30: push (2.4.1)" - due to missing quotes in openvpn.conf
+- [ ] Enable the `--tls-crypt` option in [`ovpn_genconfig`](https://github.com/chepurko/docker-openvpn/blob/master/bin/ovpn_genconfig) of the Docker image.
