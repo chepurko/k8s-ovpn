@@ -8,8 +8,9 @@
 
 ```bash
 ...
-- port: 64781
-    targetPort: 64781
+# run 'shuf -i 49152-65535 -n 1' to find a high, random port
+- port: 57156
+    targetPort: 57156
     protocol: UDP
     name: openvpn1
 ...
@@ -22,7 +23,6 @@
       - image: chepurko/docker-openvpn
         name: ovpn1
         ports:
-        # run 'shuf -i 49152-65535 -n 1' to find a high, random port
         - containerPort: 57156
           name: openvpn1
         securityContext:
