@@ -36,26 +36,6 @@ spec:
           mountPath: /etc/openvpn
         - name: ccd
           mountPath: /etc/openvpn/ccd
-      - image: chepurko/docker-openvpn
-        name: ovpn1
-        ports:
-        - containerPort: 64781
-          name: openvpn1
-        securityContext:
-          capabilities:
-            add:
-            - NET_ADMIN
-        volumeMounts:
-        - name: ovpn1-key
-          mountPath: /etc/openvpn/pki/private
-        - name: ovpn1-cert
-          mountPath: /etc/openvpn/pki/issued
-        - name: ovpn1-pki
-          mountPath: /etc/openvpn/pki
-        - name: ovpn1-conf
-          mountPath: /etc/openvpn
-        - name: ccd1
-          mountPath: /etc/openvpn/ccd
       volumes:
       - name: ovpn0-key
         secret:
@@ -74,20 +54,3 @@ spec:
       - name: ccd
         configMap:
           name: ccd
-      - name: ovpn1-key
-        secret:
-          secretName: ovpn1-key
-          defaultMode: 0600
-      - name: ovpn1-cert
-        secret:
-          secretName: ovpn1-cert
-      - name: ovpn1-pki
-        secret:
-          secretName: ovpn1-pki
-          defaultMode: 0600
-      - name: ovpn1-conf
-        configMap:
-          name: ovpn1-conf
-      - name: ccd1
-        configMap:
-          name: ccd1

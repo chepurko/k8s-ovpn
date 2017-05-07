@@ -11,10 +11,7 @@ spec:
       targetPort: 1194
       protocol: UDP
       name: openvpn
-    - port: 64781
-      targetPort: 64781
-      protocol: UDP
-      name: openvpn1
   selector:
     app: ovpn
   type: LoadBalancer
+---
