@@ -1,7 +1,7 @@
 # k8s-ovpn
 OpenVPN on a Kubernetes cluster. Save on compute resources by kuberizing services!
 
-# Usage
+# Installation
 
 * Initialise the configuration files and ECC certificates
   * **Run these commands on your workstation.** You are creating a directory with OpenVPN configuration and sensitive PKI files. [Docker](https://docs.docker.com/engine/installation/) is required.
@@ -51,8 +51,13 @@ $ kubectl create configmap ccd --from-file=server/ccd
 * Bring up the OpenVPN server in your Kubernetes cluster.
 
 ```bash
+$ kubectl apply -f ../ovpn-Service.yaml
 $ kubectl apply -f ../ovpn-Deployment.yaml
 ```
 
-## TODO
-- [ ] Fix "Options error: Unrecognized option or missing or extra parameter(s) in /etc/openvpn/openvpn.conf:30: push (2.4.1)" - due to missing quotes in openvpn.conf
+# Usage
+
+* See [USAGE.md](USAGE.md).
+
+# TODO
+- [X] Fix "Options error: Unrecognized option or missing or extra parameter(s) in /etc/openvpn/openvpn.conf:30: push (2.4.1)" - due to missing quotes in openvpn.conf
