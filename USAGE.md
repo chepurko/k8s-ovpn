@@ -2,9 +2,9 @@
 
 ## Deploying Additional OpenVPN Servers
 
-* Let's create a second OpenVPN server Deployment with a separate and configuration. This entails adding some bits to your YAML configurations.
+* Let's create a second OpenVPN server Deployment with a separate configuration. This entails adding some bits to your YAML configurations.
 
-  * `ovpn-Services.yaml`
+`$ vim ovpn-Services.yaml`
 
 ```yaml
 ...
