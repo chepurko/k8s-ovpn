@@ -1,5 +1,15 @@
-# k8s-ovpn
-OpenVPN on a Kubernetes cluster. Save on compute resources by kuberizing services!
+# Kubernetes OpenVPN
+OpenVPN on a Kubernetes cluster. This implementation of OpenVPN simply let's you create your own secure VPN service on a cluster running on some cloud provider (this is tested on Google Cloud Platform). Other kuberized OpenVPN solutions right now aim to provide direct access to services inside the clister itself, but *this is not the aim* of **k8s-openvpn**.
+
+**k8s-openvpn** relies on [excellent existing Docker implementations](https://github.com/kylemanna/docker-openvpn) of OpenVP and turns it into a reliable, scalable, and easy-to-deploy Kubernetes Deploymemt. It runs in a separate Namespace to isolate it from the rest of the cluster, and uses Secrets and ConfigMaps instead of Persistent Volumes to store configuration and PKI.
+
+With **Kubernetes OpenVPN** you can roll your own secure VPN service with the ability to easily deploy multiple configurations and authorise friends and family too!
+
+# Prerequisites
+
+* You need decent Kubernetes skills if you want to understand what you're doing. Fortunately the [docs](https://kubernetes.io/docs/home/) are excellent.
+* These instructions utilise Google Cloud Platform so [deploy your cluster there](https://kubernetes.io/docs/getting-started-guides/gce/) if you want to follow along verbatim.
+* You should familiarise yourself with the documentation of the [OpenVPN container](https://github.com/chepurko/docker-openvpn/tree/master/docs) itself. Here we're primarily concerned with creating a working Kubernetes OpenVPN setup. The are many more features and configurations to OpenVPN, though.
 
 # Installation
 
