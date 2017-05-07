@@ -64,7 +64,7 @@
 
 ```bash
 $ mkdir ovpn1 && cd ovpn1
-$ $ docker run --net=none --rm -it -v $PWD:/etc/openvpn chepurko/docker-openvpn ovpn_genconfig \
+$ docker run --net=none --rm -it -v $PWD:/etc/openvpn chepurko/docker-openvpn ovpn_genconfig \
     -u udp://VPN.SERVERNAME.COM:57156 \
     -C 'AES-256-GCM' -a 'SHA384' -T 'TLS-ECDHE-ECDSA-WITH-AES-256-GCM-SHA384' \
     -b -n 185.121.177.177 -n 185.121.177.53 -n 87.98.175.85
