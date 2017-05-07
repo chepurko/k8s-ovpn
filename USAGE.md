@@ -1,5 +1,7 @@
 # Usage
 
+## Deploying Additional OpenVPN Servers
+
 * Let's create a second OpenVPN server container with a separate address and configuration. This entails adding some bits to your YAML configurations.
 
   * `ovpn-Services.yaml`
