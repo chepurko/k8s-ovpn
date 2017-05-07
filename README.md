@@ -52,8 +52,8 @@ $ kubectl create secret generic ovpn0-key --from-file=server/pki/private/VPN.SER
 $ kubectl create secret generic ovpn0-cert --from-file=server/pki/issued/VPN.SERVERNAME.COM.crt
 $ kubectl create secret generic ovpn0-pki \
     --from-file=server/pki/ca.crt --from-file=server/pki/dh.pem --from-file=server/pki/ta.key
-$ kubectl create configmap openvpn-conf --from-file=server/
-$ kubectl create configmap ccd --from-file=server/ccd
+$ kubectl create configmap ovpn0-conf --from-file=server/
+$ kubectl create configmap ccd0 --from-file=server/ccd
 
 ```
 
