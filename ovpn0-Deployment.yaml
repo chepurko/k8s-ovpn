@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: ovpn
+  name: ovpn0
   namespace: ovpn
   labels:
     app: ovpn

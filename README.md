@@ -9,6 +9,8 @@ OpenVPN on a Kubernetes cluster. Save on compute resources by kuberizing service
 ```bash
 # docker
 $ mkdir ovpn0 && cd ovpn0
+# Modify the crypto algos to your liking and see documentation here
+# https://github.com/kylemanna/docker-openvpn/blob/master/docs/paranoid.md
 $ docker run --net=none --rm -it -v $PWD:/etc/openvpn chepurko/docker-openvpn ovpn_genconfig \
     -u udp://VPN.SERVERNAME.COM \
     -C 'AES-256-GCM' -a 'SHA384' -T 'TLS-ECDHE-ECDSA-WITH-AES-256-GCM-SHA384' \
@@ -71,3 +73,7 @@ $ kubectl apply -f ../ovpn-Deployment.yaml
 # TODO
 - [X] Fix "Options error: Unrecognized option or missing or extra parameter(s) in /etc/openvpn/openvpn.conf:30: push (2.4.1)" - due to missing quotes in openvpn.conf
 - [ ] Enable the `--tls-crypt` option in [`ovpn_genconfig`](https://github.com/chepurko/docker-openvpn/blob/master/bin/ovpn_genconfig) of the Docker image.
+
+# Acknowledgements
+
+This project relies on the very comprehensive [kylemanna/docker-openvpn](https://github.com/kylemanna/docker-openvpn) image.

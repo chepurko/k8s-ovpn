@@ -2,11 +2,11 @@
 
 ## Deploying Additional OpenVPN Servers
 
-* Let's create a second OpenVPN server container with a separate address and configuration. This entails adding some bits to your YAML configurations.
+* Let's create a second OpenVPN server Deployment with a separate and configuration. This entails adding some bits to your YAML configurations.
 
   * `ovpn-Services.yaml`
 
-```bash
+```yaml
 ...
 # run 'shuf -i 49152-65535 -n 1' to find a high, random port
 - port: 57156
@@ -16,10 +16,27 @@
 ...
 ```
 
-* `ovpn-Deployment.yaml`
+  * Create a new `ovpn1-Deployment.yaml` configuration.
 
-```bash
-...
+```yaml
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: ovpn1
+  namespace: ovpn
+  labels:
+    app: ovpn
+    track: stable
+spec:
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        name: openvpn
+        app: ovpn
+    spec:
+      containers:
       - image: chepurko/docker-openvpn
         name: ovpn1
         ports:
@@ -40,7 +57,7 @@
           mountPath: /etc/openvpn
         - name: ccd1
           mountPath: /etc/openvpn/ccd
-...
+      volumes:
       - name: ovpn1-key
         secret:
           secretName: ovpn1-key
@@ -64,6 +81,8 @@
 
 ```bash
 $ mkdir ovpn1 && cd ovpn1
+# Modify the crypto algos to your liking and see documentation here
+# https://github.com/kylemanna/docker-openvpn/blob/master/docs/paranoid.md
 $ docker run --net=none --rm -it -v $PWD:/etc/openvpn chepurko/docker-openvpn ovpn_genconfig \
     -u udp://VPN.SERVERNAME.COM:57156 \
     -C 'AES-256-GCM' -a 'SHA384' -T 'TLS-ECDHE-ECDSA-WITH-AES-256-GCM-SHA384' \
@@ -112,4 +131,7 @@ $ kubectl create configmap ccd1 --from-file=server/ccd
 
 ```bash
 $ kubectl apply -f ../ovpn-Service.yaml
-$ kubectl apply -f ../ovpn-Deployment.yaml
+$ kubectl apply -f ../ovpn1-Deployment.yaml
+```
+
+* Now the `Service` object you created, which is acting as a load balancer, will direct traffic between two ports (1194 and 57156, in this case) and their respective `Deployments`, on the same address (VPN.SERVERNAME.COM).

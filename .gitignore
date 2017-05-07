@@ -1,1 +1,3 @@
-openvpn*/
+ovpn[0-9]*
+!ovpn0*
+ovpn[0-9]*/**
