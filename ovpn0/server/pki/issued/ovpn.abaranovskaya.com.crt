@@ -1,0 +1,57 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 1 (0x1)
+    Signature Algorithm: ecdsa-with-SHA256
+        Issuer: CN=ovpn0 CA
+        Validity
+            Not Before: May  5 22:38:47 2017 GMT
+            Not After : May  3 22:38:47 2027 GMT
+        Subject: CN=ovpn.abaranovskaya.com
+        Subject Public Key Info:
+            Public Key Algorithm: id-ecPublicKey
+                Public-Key: (384 bit)
+                pub: 
+                    04:fd:b1:bf:c0:e4:6d:ac:71:ce:b1:6e:4d:6f:d4:
+                    03:82:6b:4d:59:e6:5d:9d:79:b6:56:75:5e:35:1a:
+                    c4:29:fc:c9:54:00:d3:e7:e3:bd:11:83:a5:81:60:
+                    bb:99:7e:66:a0:11:cf:e8:27:8b:15:5c:7b:9d:ac:
+                    17:fb:84:1a:10:f0:c1:41:f3:d2:53:ef:4f:cd:a2:
+                    b2:d1:cd:a2:b7:26:1a:7c:84:46:fd:3a:bb:da:c0:
+                    e6:35:c4:a7:71:d2:54
+                ASN1 OID: secp384r1
+                NIST CURVE: P-384
+        X509v3 extensions:
+            X509v3 Basic Constraints: 
+                CA:FALSE
+            X509v3 Subject Key Identifier: 
+                6E:A9:A5:9E:C1:24:59:04:4B:64:CC:8A:CA:49:65:58:7C:DC:59:FC
+            X509v3 Authority Key Identifier: 
+                keyid:15:34:5F:B6:6F:4A:80:A4:7B:1F:DE:F3:2A:75:ED:DF:6F:4D:44:A3
+                DirName:/CN=ovpn0 CA
+                serial:C3:C3:CE:3E:79:58:67:DA
+
+            X509v3 Extended Key Usage: 
+                TLS Web Server Authentication
+            X509v3 Key Usage: 
+                Digital Signature, Key Encipherment
+    Signature Algorithm: ecdsa-with-SHA256
+         30:65:02:30:08:f0:84:c4:cf:a6:8b:16:03:c2:41:c3:2a:ef:
+         61:26:32:5e:c0:9e:e7:1b:f3:22:0c:fb:9b:6a:41:e7:d7:75:
+         dd:ac:76:27:6a:af:2b:29:ff:6d:35:f4:14:f3:8f:22:02:31:
+         00:e2:6a:e3:db:ab:9a:2b:9b:62:ad:50:95:2a:33:6f:38:01:
+         d4:63:84:2d:77:10:e6:03:77:46:e7:e3:37:37:b9:6a:98:46:
+         c2:48:ce:77:3d:02:a6:d9:8b:b2:90:97:92
+-----BEGIN CERTIFICATE-----
+MIIB9TCCAXugAwIBAgIBATAKBggqhkjOPQQDAjATMREwDwYDVQQDDAhvdnBuMCBD
+QTAeFw0xNzA1MDUyMjM4NDdaFw0yNzA1MDMyMjM4NDdaMCExHzAdBgNVBAMMFm92
+cG4uYWJhcmFub3Zza2F5YS5jb20wdjAQBgcqhkjOPQIBBgUrgQQAIgNiAAT9sb/A
+5G2scc6xbk1v1AOCa01Z5l2debZWdV41GsQp/MlUANPn470Rg6WBYLuZfmagEc/o
+J4sVXHudrBf7hBoQ8MFB89JT70/NorLRzaK3Jhp8hEb9OrvawOY1xKdx0lSjgZQw
+gZEwCQYDVR0TBAIwADAdBgNVHQ4EFgQUbqmlnsEkWQRLZMyKykllWHzcWfwwQwYD
+VR0jBDwwOoAUFTRftm9KgKR7H97zKnXt329NRKOhF6QVMBMxETAPBgNVBAMMCG92
+cG4wIENBggkAw8POPnlYZ9owEwYDVR0lBAwwCgYIKwYBBQUHAwEwCwYDVR0PBAQD
+AgWgMAoGCCqGSM49BAMCA2gAMGUCMAjwhMTPposWA8JBwyrvYSYyXsCe5xvzIgz7
+m2pB59d13ax2J2qvKyn/bTX0FPOPIgIxAOJq49urmiubYq1QlSozbzgB1GOELXcQ
+5gN3RufjNze5aphGwkjOdz0CptmLspCXkg==
+-----END CERTIFICATE-----

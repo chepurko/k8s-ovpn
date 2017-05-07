@@ -1,0 +1,70 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 4 (0x4)
+    Signature Algorithm: ecdsa-with-SHA256
+        Issuer: CN=ovpn0 CA
+        Validity
+            Not Before: May  5 22:44:48 2017 GMT
+            Not After : May  3 22:44:48 2027 GMT
+        Subject: CN=anna
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (2048 bit)
+                Modulus:
+                    00:c1:a8:95:c5:8e:7a:b4:e4:2b:0f:81:68:03:55:
+                    9f:a5:bb:87:b4:bf:54:3f:64:c3:19:7d:a0:67:75:
+                    ef:bb:e6:86:dc:6b:d3:68:46:85:ab:62:21:2f:b4:
+                    5b:da:35:61:8f:f5:8b:1e:12:71:75:99:69:df:26:
+                    35:00:53:d3:85:6c:c8:3e:b2:be:aa:55:7f:60:22:
+                    ee:4a:fb:29:2c:9c:b6:03:5f:df:fb:60:42:cc:96:
+                    b8:f9:0f:66:b7:4e:44:6c:f2:94:0c:2a:1b:ae:38:
+                    ee:3f:d4:36:12:c9:45:92:9d:8d:f9:9f:cf:d4:7b:
+                    0b:44:03:f4:d7:00:93:05:d4:90:3f:88:b3:e0:46:
+                    e6:20:67:09:ec:f3:6d:86:03:a2:55:75:be:5e:f0:
+                    9a:3a:04:78:ff:51:f4:9c:c6:fc:77:07:16:38:78:
+                    e6:a0:75:e4:8c:e4:b0:7c:6c:75:6e:09:65:e6:4b:
+                    f2:4c:46:39:5f:a5:ef:a3:f4:87:0b:5a:ed:6a:e1:
+                    12:48:38:8a:f3:c8:fc:0a:8f:d0:fb:e6:a0:93:4a:
+                    26:3e:be:88:49:d8:37:98:e6:f5:08:35:19:6d:50:
+                    af:91:d4:1e:c1:27:a5:15:c6:b7:e1:25:34:b3:78:
+                    1c:ea:91:a6:a3:b1:b9:43:5d:ef:fd:60:d0:60:f5:
+                    a9:ff
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Basic Constraints: 
+                CA:FALSE
+            X509v3 Subject Key Identifier: 
+                62:9F:66:88:3E:1F:48:E9:F4:ED:13:31:D7:43:1F:32:5D:55:23:6C
+            X509v3 Authority Key Identifier: 
+                keyid:15:34:5F:B6:6F:4A:80:A4:7B:1F:DE:F3:2A:75:ED:DF:6F:4D:44:A3
+                DirName:/CN=ovpn0 CA
+                serial:C3:C3:CE:3E:79:58:67:DA
+
+            X509v3 Extended Key Usage: 
+                TLS Web Client Authentication
+            X509v3 Key Usage: 
+                Digital Signature
+    Signature Algorithm: ecdsa-with-SHA256
+         30:65:02:30:19:0e:8a:1e:c8:be:b1:1f:91:a4:1a:cb:88:20:
+         0d:94:75:41:e8:db:e8:c6:db:36:f4:ca:69:e5:45:e1:8b:8c:
+         a2:1e:72:24:9e:f1:c3:c2:a9:26:5a:81:1f:71:a6:f0:02:31:
+         00:ab:54:68:3a:b5:0d:65:e3:b6:ac:eb:b8:37:34:6c:26:9a:
+         3a:4e:26:4a:a0:4a:f3:39:61:c9:a6:d5:61:ca:cd:44:0e:59:
+         df:25:12:d4:9f:f4:8a:ac:79:1f:f1:3f:d8
+-----BEGIN CERTIFICATE-----
+MIICkTCCAhegAwIBAgIBBDAKBggqhkjOPQQDAjATMREwDwYDVQQDDAhvdnBuMCBD
+QTAeFw0xNzA1MDUyMjQ0NDhaFw0yNzA1MDMyMjQ0NDhaMA8xDTALBgNVBAMMBGFu
+bmEwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDBqJXFjnq05CsPgWgD
+VZ+lu4e0v1Q/ZMMZfaBnde+75obca9NoRoWrYiEvtFvaNWGP9YseEnF1mWnfJjUA
+U9OFbMg+sr6qVX9gIu5K+yksnLYDX9/7YELMlrj5D2a3TkRs8pQMKhuuOO4/1DYS
+yUWSnY35n8/UewtEA/TXAJMF1JA/iLPgRuYgZwns822GA6JVdb5e8Jo6BHj/UfSc
+xvx3BxY4eOagdeSM5LB8bHVuCWXmS/JMRjlfpe+j9IcLWu1q4RJIOIrzyPwKj9D7
+5qCTSiY+vohJ2DeY5vUINRltUK+R1B7BJ6UVxrfhJTSzeBzqkaajsblDXe/9YNBg
+9an/AgMBAAGjgZQwgZEwCQYDVR0TBAIwADAdBgNVHQ4EFgQUYp9miD4fSOn07RMx
+10MfMl1VI2wwQwYDVR0jBDwwOoAUFTRftm9KgKR7H97zKnXt329NRKOhF6QVMBMx
+ETAPBgNVBAMMCG92cG4wIENBggkAw8POPnlYZ9owEwYDVR0lBAwwCgYIKwYBBQUH
+AwIwCwYDVR0PBAQDAgeAMAoGCCqGSM49BAMCA2gAMGUCMBkOih7IvrEfkaQay4gg
+DZR1Qejb6MbbNvTKaeVF4YuMoh5yJJ7xw8KpJlqBH3Gm8AIxAKtUaDq1DWXjtqzr
+uDc0bCaaOk4mSqBK8zlhyabVYcrNRA5Z3yUS1J/0iqx5H/E/2A==
+-----END CERTIFICATE-----

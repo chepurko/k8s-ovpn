@@ -1,0 +1,44 @@
+{  
+   "Type":"UnencryptedConfiguration",
+   "Certificates":[  
+      {  
+         "GUID":"{799d44ab-15b6-4672-a69b-a8b8be458313}",
+         "Type":"Authority",
+         "X509":"MIICkTCCAhegAwIBAgIBBDAKBggqhkjOPQQDAjATMREwDwYDVQQDDAhvdnBuMCBDQTAeFw0xNzA1MDUyMjQ0NDhaFw0yNzA1MDMyMjQ0NDhaMA8xDTALBgNVBAMMBGFubmEwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDBqJXFjnq05CsPgWgDVZ+lu4e0v1Q/ZMMZfaBnde+75obca9NoRoWrYiEvtFvaNWGP9YseEnF1mWnfJjUAU9OFbMg+sr6qVX9gIu5K+yksnLYDX9/7YELMlrj5D2a3TkRs8pQMKhuuOO4/1DYSyUWSnY35n8/UewtEA/TXAJMF1JA/iLPgRuYgZwns822GA6JVdb5e8Jo6BHj/UfScxvx3BxY4eOagdeSM5LB8bHVuCWXmS/JMRjlfpe+j9IcLWu1q4RJIOIrzyPwKj9D75qCTSiY+vohJ2DeY5vUINRltUK+R1B7BJ6UVxrfhJTSzeBzqkaajsblDXe/9YNBg9an/AgMBAAGjgZQwgZEwCQYDVR0TBAIwADAdBgNVHQ4EFgQUYp9miD4fSOn07RMx10MfMl1VI2wwQwYDVR0jBDwwOoAUFTRftm9KgKR7H97zKnXt329NRKOhF6QVMBMxETAPBgNVBAMMCG92cG4wIENBggkAw8POPnlYZ9owEwYDVR0lBAwwCgYIKwYBBQUHAwIwCwYDVR0PBAQDAgeAMAoGCCqGSM49BAMCA2gAMGUCMBkOih7IvrEfkaQay4ggDZR1Qejb6MbbNvTKaeVF4YuMoh5yJJ7xw8KpJlqBH3Gm8AIxAKtUaDq1DWXjtqzruDc0bCaaOk4mSqBK8zlhyabVYcrNRA5Z3yUS1J/0iqx5H/E/2A=="
+      }
+   ],
+   "NetworkConfigurations":[  
+      {  
+         "GUID":"{36ee81d7-b781-4392-af0a-018409f629d9}",
+         "Name":"ovpn.abaranovskaya.com",
+         "Type":"VPN",
+         "VPN":{  
+            "Type":"OpenVPN",
+            "Host":"ovpn.abaranovskaya.com",
+            "OpenVPN":{  
+               "ServerCARefs":[  
+                  "{799d44ab-15b6-4672-a69b-a8b8be458313}"
+               ],
+               "AuthRetry":"interact",
+               "ClientCertType":"Pattern",
+               "ClientCertPattern":{  
+                  "IssuerCARef":[  
+                     "{799d44ab-15b6-4672-a69b-a8b8be458313}"
+                  ]
+               },
+               "CompLZO":"true",
+               "Port":53876,
+               "Proto":"udp",
+               "RemoteCertTLS":"server",
+               "RemoteCertEKU":"TLS Web Server Authentication",
+               "Cipher":"AES-256-CBC",
+               "SaveCredentials":false,
+               "ServerPollTimeout":10,
+               "Username":"anna",
+               "KeyDirection":"1",
+               "TLSAuthContents":"-----BEGIN OpenVPN Static key V1-----\n319256b57add11f8fa2f4fb48c398a5c\n56a1ebbb65a534981edbf480a160ee01\n6a32ae3816628c3cfcbf7d8b29a0457f\n4c67374f9db3024bdc884608d093e741\n98d77ae5147c0dcdddb6806feb191acf\nd8fed459d7512820c69a7532802c38ae\n457b2795f98ac7d3991fdce11869181b\n303e0f586e9c8db7e3d4b6b87f7875d7\n458ac5e22e3f4daa9438e8136436a148\n2381a3c6bec244e9e95aa94ebeef8470\n8cf478ea213b85df187e1e4dc947da9b\n9c915da037dcf4c0c940c723b0d40aa8\ne985e660a440f9581b29b2f72d64c194\nb0ed77842d402391ed71912443976db4\nc3659cc7a6a19e71bd74c5dcf444debb\n7d327e0f23dd1330bf4565ba1e64ab12\n-----END OpenVPN Static key V1-----\n"
+            }
+         }
+      }
+   ]
+}
