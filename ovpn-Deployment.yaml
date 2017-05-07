@@ -32,9 +32,9 @@ spec:
           mountPath: /etc/openvpn/pki/issued
         - name: ovpn0-pki
           mountPath: /etc/openvpn/pki
-        - name: openvpn-conf
+        - name: ovpn0-conf
           mountPath: /etc/openvpn
-        - name: ccd
+        - name: ccd0
           mountPath: /etc/openvpn/ccd
       volumes:
       - name: ovpn0-key
@@ -48,9 +48,9 @@ spec:
         secret:
           secretName: ovpn0-pki
           defaultMode: 0600
-      - name: openvpn-conf
+      - name: ovpn0-conf
         configMap:
-          name: openvpn-conf
-      - name: ccd
+          name: ovpn0-conf
+      - name: ccd0
         configMap:
-          name: ccd
+          name: ccd0
