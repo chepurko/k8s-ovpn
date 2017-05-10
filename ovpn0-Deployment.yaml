@@ -1,10 +1,28 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ovpn0
+  namespace: ovpn
+  labels:
+    app: ovpn0
+spec:
+  ports:
+    - port: 1194
+      targetPort: 1194
+      nodePort: 31304
+      protocol: UDP
+      name: openvpn
+  selector:
+    app: ovpn0
+  type: NodePort
+---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: ovpn0
   namespace: ovpn
   labels:
-    app: ovpn
+    app: ovpn0
     track: stable
 spec:
   strategy:
@@ -13,11 +31,11 @@ spec:
     metadata:
       labels:
         name: openvpn
-        app: ovpn
+        app: ovpn0
     spec:
       containers:
       - image: chepurko/docker-openvpn
-        name: openvpn
+        name: ovpn
         ports:
         - containerPort: 1194
           name: openvpn

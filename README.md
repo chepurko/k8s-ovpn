@@ -13,16 +13,17 @@ With **Kubernetes OpenVPN** you can roll your own secure VPN service with the ab
 
 # Installation
 
+* Note that we've chosen NodePort 31304 here. You can run `shuf -i 30000-32767 -n 1` to get a random port number in the Kubernetes NodePort range if for some reason you need to use a different port number. Don't forget to update the respective port fields in the commands and configurations.
+
 * Initialise the configuration files and ECC certificates
   * **Run these commands on your workstation.** You are creating a directory with OpenVPN configuration and sensitive PKI files. [Docker](https://docs.docker.com/engine/installation/) is required.
 
 ```bash
-# docker
 $ mkdir ovpn0 && cd ovpn0
 # Modify the crypto algos to your liking and see documentation here
 # https://github.com/kylemanna/docker-openvpn/blob/master/docs/paranoid.md
 $ docker run --net=none --rm -it -v $PWD:/etc/openvpn chepurko/docker-openvpn ovpn_genconfig \
-    -u udp://VPN.SERVERNAME.COM \
+    -u udp://VPN.SERVERNAME.COM:31304 \
     -C 'AES-256-GCM' -a 'SHA384' -T 'TLS-ECDHE-ECDSA-WITH-AES-256-GCM-SHA384' \
     -b -n 185.121.177.177 -n 185.121.177.53 -n 87.98.175.85
 $ docker run -e EASYRSA_ALGO=ec -e EASYRSA_CURVE=secp384r1 \
@@ -72,9 +73,18 @@ $ kubectl create configmap ccd0 --from-file=server/ccd
 * Bring up the OpenVPN server in your Kubernetes cluster.
 
 ```bash
-$ kubectl apply -f ../ovpn-Service.yaml
-$ kubectl apply -f ../ovpn-Deployment.yaml
+$ kubectl apply -f ../ovpn0-Deployment.yaml
 ```
+
+* Create a firewall rule in Google Cloud Platform
+
+```bash
+$ gcloud compute firewall-rules create ovpn0 --allow=udp:31304
+# Optional: specify the target instances instead of opening port for whole network
+$ gcloud compute firewall-rules create ovpn0 --allow=udp:31304 --target-tags <your_cluster>-minion
+```
+
+* If you are using a DNS hostname, make sure you've created an A record in your DNS settings pointing to an IP address of  **any of the nodes** in your cluster. It doesn't matter which node you point to, as the Service is listening on all nodes and does the routing for you.
 
 # Usage
 

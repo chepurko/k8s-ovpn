@@ -2,30 +2,38 @@
 
 ## Deploying Additional OpenVPN Servers
 
-* Let's create a second OpenVPN server Deployment with a separate configuration. This entails adding some bits to your YAML configurations.
+* Let's create a second OpenVPN server Deployment with a separate configuration. This entails creating new YAML configurations.
 
-`$ vim ovpn-Services.yaml`
-
-```yaml
-...
-# run 'shuf -i 49152-65535 -n 1' to find a high, random port
-- port: 57156
-    targetPort: 57156
-    protocol: UDP
-    name: openvpn1
-...
-```
-
-  * Create a new `ovpn1-Deployment.yaml` configuration.
+`$ vim ovpn1-Deployment.yaml`
 
 ```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: ovpn1
+  namespace: ovpn
+  labels:
+    app: ovpn1
+spec:
+  ports:
+    - port: 1194
+      targetPort: 1194
+      # Run 'shuf -i 30000-32767 -n 1' to get a random
+      # port number in the Kubernetes NodePort range
+      nodePort: 30909
+      protocol: UDP
+      name: openvpn
+  selector:
+    app: ovpn1
+  type: NodePort
+---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: ovpn1
   namespace: ovpn
   labels:
-    app: ovpn
+    app: ovpn1
     track: stable
 spec:
   strategy:
@@ -34,14 +42,14 @@ spec:
     metadata:
       labels:
         name: openvpn
-        app: ovpn
+        app: ovpn1
     spec:
       containers:
       - image: chepurko/docker-openvpn
-        name: ovpn1
+        name: ovpn
         ports:
-        - containerPort: 57156
-          name: openvpn1
+        - containerPort: 1194
+          name: openvpn
         securityContext:
           capabilities:
             add:
@@ -84,7 +92,7 @@ $ mkdir ovpn1 && cd ovpn1
 # Modify the crypto algos to your liking and see documentation here
 # https://github.com/kylemanna/docker-openvpn/blob/master/docs/paranoid.md
 $ docker run --net=none --rm -it -v $PWD:/etc/openvpn chepurko/docker-openvpn ovpn_genconfig \
-    -u udp://VPN.SERVERNAME.COM:57156 \
+    -u udp://VPN.SERVERNAME.COM:30909 \
     -C 'AES-256-GCM' -a 'SHA384' -T 'TLS-ECDHE-ECDSA-WITH-AES-256-GCM-SHA384' \
     -b -n 185.121.177.177 -n 185.121.177.53 -n 87.98.175.85
 $ docker run -e EASYRSA_ALGO=ec -e EASYRSA_CURVE=secp384r1 \
@@ -130,8 +138,15 @@ $ kubectl create configmap ccd1 --from-file=server/ccd
 * Bring up the OpenVPN server in your Kubernetes cluster.
 
 ```bash
-$ kubectl apply -f ../ovpn-Service.yaml
 $ kubectl apply -f ../ovpn1-Deployment.yaml
 ```
 
-* Now the `Service` object you created, which is acting as a load balancer, will direct traffic between two ports (1194 and 57156, in this case) and their respective `Deployments`, on the same address (VPN.SERVERNAME.COM).
+* Create a firewall rule in Google Cloud Platform
+
+```bash
+$ gcloud compute firewall-rules create ovpn0 --allow=udp:30909
+# Optional: specify the target instances instead of opening port for whole network
+$ gcloud compute firewall-rules create ovpn0 --allow=udp:30909 --target-tags <your_cluster>-minion
+```
+
+* Now the `Service` objects you created (defined inside of the `ovpnx-Deployment.yaml`s), will direct traffic between two ports (31304 and 30909, in this case) and their respective `Deployments`, on the same address (VPN.SERVERNAME.COM).
