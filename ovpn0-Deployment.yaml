@@ -34,11 +34,12 @@ spec:
         app: ovpn0
     spec:
       containers:
-      - image: chepurko/docker-openvpn
+      - image: kylemanna/openvpn
         name: ovpn
         ports:
         - containerPort: 1194
           name: openvpn
+          protocol: UDP
         securityContext:
           capabilities:
             add:
