@@ -86,6 +86,12 @@ $ gcloud compute firewall-rules create ovpn0 --allow=udp:31304 --target-tags <yo
 
 * If you are using a DNS hostname, make sure you've created an A record in your DNS settings pointing to an IP address of  **any of the minion nodes** in your cluster. It doesn't matter which minion node you point to, as the Service is listening on all nodes and does the routing for you.
 
+# Helm Installation
+
+Thanks to [suda](https://github.com/suda) this is available as a [Helm chart](https://github.com/suda/k8s-ovpn-chart).
+
+Thanks to 
+
 # Usage
 
 * See [USAGE.md](USAGE.md).
