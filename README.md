@@ -90,8 +90,6 @@ $ gcloud compute firewall-rules create ovpn0 --allow=udp:31304 --target-tags <yo
 
 Thanks to [suda](https://github.com/suda) this is available as a [Helm chart](https://github.com/suda/k8s-ovpn-chart).
 
-Thanks to 
-
 # Usage
 
 * See [USAGE.md](USAGE.md).
